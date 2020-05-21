@@ -20,14 +20,17 @@ posts = [
     }
 ]
 
+
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.jinja', posts=posts)
+    return render_template('home.html', posts=posts)
+
 
 @app.route('/about')
 def about():
-    return render_template('about.jinja', title='About')
+    return render_template('about.html', title='About')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -35,12 +38,13 @@ def register():
     if form.validate_on_submit():
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('home'))
-    return render_template('register.jinja', title="Register", form=form)
+    return render_template('register.html', title="Register", form=form)
+
 
 @app.route('/login')
 def login():
     form = LoginForm()
-    return render_template('login.jinja', title="login", form=form)
+    return render_template('login.html', title="login", form=form)
 
 
 # Init app
